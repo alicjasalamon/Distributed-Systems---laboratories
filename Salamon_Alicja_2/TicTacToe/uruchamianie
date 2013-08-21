@@ -1,0 +1,15 @@
+//to moja sciagawka zapewniajaca szybkie uruchamianie
+
+java -cp server.jar:common.jar -Djava.rmi.server.codebase=file:/home/alicja/rozprochy/Salamon_Alicja_2/TicTacToe/src/ server.Server 127.0.0.1 1099
+java -cp client.jar:common.jar -Djava.rmi.server.codebase=file:/home/alicja/rozprochy/Salamon_Alicja_2/TicTacToe/src/ client.Client 127.0.0.1 1099 ala
+
+
+
+
+
+java -cp server.jar:common.jar -Djava.rmi.server.codebase=file:common.jar -Djava.security.policy=server.policy server.Server 127.0.0.1 1099
+java -cp client.jar:common.jar -Djava.security.policy=client.policy client.Client 127.0.0.1 1099 gracz1
+
+java -Xmx5m -cp client.jar:common.jar -Djava.security.policy=client.policy client.Client ernie.icslab.agh.edu.pl 1099 gracz1
+
+

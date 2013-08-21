@@ -1,0 +1,3 @@
+grant codeBase "file:server.jar" {
+    permission java.security.AllPermission;
+};

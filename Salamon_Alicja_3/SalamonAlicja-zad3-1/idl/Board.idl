@@ -1,0 +1,75 @@
+module Board {
+
+	exception FigureNameNotExists {};
+	exception FigureWrongParameters {}; 
+	exception FigureNotExists {};
+	  
+	exception UserAlreadyExists {};
+	exception UserNotExists {};
+	exception ItemBusy {};
+   
+  	typedef sequence <string> Dimensions;
+  	typedef short Color;
+  	
+  	struct Parameters{
+  		Dimensions dimensions;
+  		Color color;
+  	};
+  	
+  	interface Figure; 
+	interface Listener;
+   	
+   	typedef sequence<Figure> State;
+   
+	interface PaintingBoard{
+		
+		Figure createFigure(in string type, in Parameters params) raises (FigureNameNotExists, FigureWrongParameters);
+		Figure removeFigure(in Figure figure) raises (FigureNotExists);
+		
+		void register(in string name, in Listener listener) raises (UserAlreadyExists);
+		void unregister(in string name) raises (UserNotExists);
+		
+   	};
+   	
+   	interface Figure{
+   		
+   		attribute double x;
+   		attribute double y;
+   		attribute short colour;
+   		
+   		void change(in Parameters params) raises (FigureWrongParameters);
+  	
+  	};
+   
+   	interface Line : Figure{
+   		
+   		attribute double x1;
+   		attribute double y1;
+   	};
+   	
+   	interface Oval : Figure{
+   	
+   		attribute double r1;
+   		attribute double r2;
+   		
+   	};
+   	
+   	interface Rectangle : Figure{
+   	
+   		attribute double a;
+   		attribute double b;
+   		
+   	};
+   	
+   	interface Cursor : Figure{
+   	
+   		attribute boolean visible;
+   		//Figure getFigure() raises (NoFigureThere);
+   	};
+   	
+   	interface Listener{
+   		void onNewFigure(in Figure figure);
+   		void onRegistation(in State allFigures);
+   	};
+   
+}; 
